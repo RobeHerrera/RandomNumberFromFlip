@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the button to calculate the number of years since midnight, January 1, 1970.</p>
+
+<button onclick="randomNumber(5)">Try it</button>
+
+<p id="hashing"></p>
+<p id="bit"></p>
+<p id="rand"></p>
+
+<script>
+function flip() {
+  return Math.random() >= 0.5;
+}
+
+function randomNumber(n) {
+
+	// Checing if it is a correct input
+  if(n === undefined) throw new Error("n is required");
+  if(n <= 0) throw new Error("n must be greater than 0");
+  if(n > 1000000) throw new Error("n must be lower than 1,000,000");
+	
+	//get number from the Date to make this the most posible random
+	var hashing = new Date().getMilliseconds();
+	
+	//get TRUE or FALSE from flip Function
+	var bit = flip();
+	
+	//Using the bit to incorporate in to the hashing
+	var random =  (hashing >> 1) | (bit << 11);
+	
+	//Limit according to the parameter
+	random = random % n;
+	
+	//Print in HTML
+	 document.getElementById("rand").innerHTML = random;
+
+}
+    
+</script>
+
+</body>
+</html>
